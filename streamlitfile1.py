@@ -1,13 +1,14 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 import streamlit as st
 import pandas as pd
 import pickle
 
-
-
-
-
-model = pickle.load(open("LinearRegressionModel.pkl",'rb'))
-
+model = pickle.load(open(r"C:\Users\easil\Downloads\pipe.pkl", 'rb'))
 
 def main():
     st.title("Car Selling Price Prediction")
@@ -30,20 +31,21 @@ def main():
 
 
     user_df = pd.DataFrame(user_data, index=[0])
-    button = st.button("Predict")
-    if button:
-         prediction = model.predict(user_df)
 
-         st.subheader("Predicted Car Selling Price")
-         st.write("The predicted selling price for the car is:", prediction)
-        
-        
+    prediction = model.predict(user_df)
 
-         
+    st.subheader("Predicted Selling Price")
+    st.write("The predicted selling price for the car is:", prediction)
 
 if __name__ == "__main__":
     main()
-    
+
+
+
+
+
+
+# In[ ]:
 
 
 
