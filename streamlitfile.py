@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
+# In[2]:
 
 
 import streamlit as st
 import pandas as pd
 import pickle
 
-model = pickle.load(open(r"C:\Users\easil\Downloads\pipe.pkl", 'rb'))
+# Load the car names from the Pickle file
+car_names = pickle.load(open(r"C:\Users\easil\car_name.pkl", 'rb'))
+
+model = pickle.load(open(r"C:\Users\easil\pipe.pkl", 'rb'))
 
 def main():
     st.title("Car Selling Price Prediction")
@@ -22,6 +24,11 @@ def main():
     transmission = st.selectbox("Transmission", ['Manual', 'Automatic'])
     owner = st.selectbox("Owner", ['First Owner', 'Second Owner', 'Third Owner', 'Fourth & Above Owner'])
 
+     # Validate car name input
+    if name not in car_names:
+        st.error("Please enter a valid car name.")
+        return
+    
     user_data = {'name': name,
                  'year': year,
                  'km_driven': km_driven,
@@ -40,9 +47,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
 
 
 # In[ ]:
